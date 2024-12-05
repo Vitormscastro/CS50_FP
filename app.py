@@ -10,7 +10,7 @@ def load_data():
 df = load_data()  
 
 # Title and description  
-st.title("Game Recommendation System")  
+st.title("Steam Game Recommendation System")  
 st.write("Enter the name of a game to get recommendations based on its description, genres, and ratings.")  
 
 # User input  
