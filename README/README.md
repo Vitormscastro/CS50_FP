@@ -1,99 +1,74 @@
-CS50x Final Project
+# Game Recommendation System  
 
-Game Recommendation System Using Steam Reviews
+#### Video Demo: [Insert Video URL Here]  
 
-What will your software do?
-Your project will recommend games to users based on their preferences and the sentiment of Steam reviews. Users can input a game they like, and the system will suggest similar games by analyzing reviews and game metadata.
+#### Description:  
+The **Game Recommendation System** is a web-based application designed to help users discover new games based on their preferences. Built using **Streamlit**, **Python**, and **pandas**, this project leverages content-based filtering techniques to recommend games similar to the ones users already enjoy. The system analyzes game descriptions, genres, and player ratings to generate personalized recommendations.  
 
-What features will it have?
-1.	Input Feature: Users can input the name of a game they like.
+This project was developed as the final submission for **CS50x**, showcasing the skills and concepts learned throughout the course, including programming, data analysis, and software development.  
 
-2.	Recommendation Feature: The system will recommend similar games based on:
-    o	Game metadata (e.g., genre, tags, developer).
-    o	Sentiment analysis of Steam reviews.
+---  
 
-3.	Review Sentiment Display: For each recommended game, the system will display the overall sentiment (positive, neutral, or negative) based on Steam reviews.
+## Features:  
+1. **Game Search**:  
+   - Users can input the name of a game they like, and the system will find the closest matches from the dataset.  
+   - A dropdown menu allows users to select the correct game if multiple matches are found.  
 
-4.	Game Details: The system will show additional details about the recommended games, such as genre, release date, and average playtime.
+2. **Personalized Recommendations**:  
+   - The system provides a list of recommended games based on the selected game.  
+   - Recommendations are generated using a **content-based filtering algorithm** that combines:  
+     - **Game descriptions** (analyzed using TF-IDF and cosine similarity).  
+     - **Genres** (encoded and compared using cosine similarity).  
+     - **Player ratings** (normalized and weighted).  
 
-How will it be executed?
-1.	Data Collection:
-    o	Use the Steam API or a dataset of Steam games and reviews (e.g., Kaggle datasets like "Steam Games Dataset").
-    o	Extract game metadata (e.g., genre, tags) and reviews.
+3. **Interactive Web Interface**:  
+   - Built with **Streamlit**, the app provides a clean and user-friendly interface.  
+   - Users can interact with the app in real-time to explore recommendations.  
 
-2.	Data Preprocessing:
-    o	Clean and preprocess the reviews (e.g., remove stopwords, tokenize text).
-    o	Use sentiment analysis to classify reviews as positive, neutral, or negative.
+4. **Dataset Integration**:  
+   - The app uses a preprocessed dataset of games, including fields such as:  
+     - Game name  
+     - Short description  
+     - Genres  
+     - Overall player ratings  
+   - The dataset is cleaned and normalized to ensure accurate recommendations.  
 
-3.	Recommendation System:
-    o	Use collaborative filtering or content-based filtering to recommend games based on user input.
-    o	Incorporate sentiment analysis scores into the recommendation algorithm.
+5. **Scalability**:  
+   - The app is designed to handle large datasets efficiently, making it suitable for future expansion with more games or additional features.  
 
-4.	Frontend Development:
-    o	Build a simple web interface using Flask or Django.
-    o	Allow users to input a game name and display recommendations with details.
+---  
 
-5.	Backend Development:
-    o	Use Python for the backend, integrating the recommendation system and sentiment analysis model.
+## Technical Details:  
+### **Technologies Used**:  
+- **Python**: The core programming language for data processing and recommendation logic.  
+- **Streamlit**: For building the interactive web application.  
+- **pandas**: For data manipulation and preprocessing.  
+- **scikit-learn**: For implementing TF-IDF vectorization and cosine similarity.  
+- **Altair**: (Optional) For visualizing data trends or distributions.  
 
-What new skills will you need to acquire?
-    •	Steam API or Dataset Handling: Learn how to fetch or use data from Steam or a dataset.
-    •	Sentiment Analysis: Use libraries like NLTK, TextBlob, or Hugging Face Transformers to analyze the sentiment of reviews.
-    •	Recommendation Systems: Understand collaborative filtering and content-based filtering.
-    •	Web Development: Build a user-friendly interface using Flask or Django.
+### **Recommendation Algorithm**:  
+The recommendation system uses a **content-based filtering approach**:  
+1. **TF-IDF Vectorization**:  
+   - Game descriptions are vectorized using the TF-IDF (Term Frequency-Inverse Document Frequency) technique to capture the importance of words in each description.  
+   - Cosine similarity is calculated between games based on their TF-IDF vectors.  
 
-What topics will you need to research?
-    •	How to use the Steam API or find a suitable dataset of Steam games and reviews.
-    •	How to preprocess text data for sentiment analysis.
-    •	How recommendation systems work and how to implement them.
-    •	How to integrate a Python backend with a web frontend.
+2. **Genre Encoding**:  
+   - Game genres are encoded using a multi-label binarizer, and cosine similarity is calculated between genre vectors.  
 
-What might you consider to be a good outcome for your project?
-    •	Good Outcome: The system recommends games based on metadata and displays their sentiment scores.
-    •	Better Outcome: The system provides accurate and diverse recommendations, incorporating both metadata and review sentiment.
-    •	Best Outcome: The system handles multiple user inputs, provides highly personalized recommendations, and displays detailed game information.
-________________________________________
-Steps to Implement the Project
-1.	Data Collection:
-o	Use the Steam API to fetch game data and reviews, or download a dataset like the Steam Games Dataset on Kaggle.
-o	Extract relevant fields such as game name, genre, tags, reviews, and ratings.
+3. **Player Ratings**:  
+   - Player ratings are normalized using Min-Max scaling and incorporated into the similarity calculation.  
 
-2.	Sentiment Analysis:
-o	Preprocess the reviews (e.g., remove punctuation, lowercase text, tokenize).
-o	Use a pre-trained sentiment analysis model (e.g., Hugging Face's distilbert-base-uncased) or train a simple model using Scikit-learn.
-o	Classify reviews as positive, neutral, or negative and calculate an overall sentiment score for each game.
+4. **Combined Similarity**:  
+   - A weighted combination of description similarity, genre similarity, and player ratings is used to generate the final similarity score:  
+     ```  
+     combined_similarity = 0.4 * description_similarity + 0.4 * genre_similarity + 0.2 * normalized_ratings  
+     ```  
 
-3.	Recommendation System:
-o	Use content-based filtering to recommend games based on metadata (e.g., genre, tags).
-o	Optionally, implement collaborative filtering to recommend games based on user preferences and reviews.
-o	Combine the sentiment scores with the recommendation algorithm to prioritize games with positive reviews.
+---  
 
-4.	Frontend Development:
-o	Build a web interface where users can:
-	Input a game they like.
-	View recommended games with details and sentiment scores.
-o	Use Flask or Django for the backend and HTML/CSS for the frontend.
-
-5.	Testing and Deployment:
-o	Test the system with different inputs to ensure accurate recommendations.
-o	Deploy the project locally or on a platform like Heroku or PythonAnywhere.
-________________________________________
-Example Workflow for the User
-1.	The user inputs the name of a game they like (e.g., "Portal 2").
-
-2.	The system fetches metadata and reviews for similar games (e.g., "Half-Life 2," "The Stanley Parable").
-
-3.	The system analyzes the sentiment of reviews for each recommended game.
-
-4.	The system displays the recommended games along with:
-    o	Genre, tags, and release date.
-    o	Sentiment score (e.g., 85% positive reviews).
-    o	A short description of the game.
-________________________________________
-Potential Challenges and Solutions
-1.	Challenge: Collecting and preprocessing Steam reviews.
-    o	Solution: Use the Steam API or a pre-existing dataset to simplify data collection.
-2.	Challenge: Implementing sentiment analysis.
-    o	Solution: Use pre-trained models like TextBlob or Hugging Face Transformers to avoid building a model from scratch.
-3.	Challenge: Building the recommendation system.
-    o	Solution: Start with content-based filtering (simpler) and add collaborative filtering later if time permits.
+## How to Run the Project:  
+### **Locally**:  
+1. Clone the repository:  
+   ```bash  
+   git clone https://github.com/your-username/game-recommendation-system.git  
+   cd game-recommendation-system
