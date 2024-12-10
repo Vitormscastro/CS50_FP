@@ -1,9 +1,9 @@
-# Game Recommendation System  
+# Steam Game Recommendation System  
 
 #### Video Demo: [(https://www.youtube.com/watch?v=cJ_o4oep8Q4)]  
 
 #### Description:  
-The **Game Recommendation System** is a web-based application designed to help users discover new games based on their preferences. Built using **Streamlit**, **Python**, and **pandas**, this project leverages content-based filtering techniques to recommend games similar to the ones users already enjoy. The system analyzes game descriptions, genres, and player ratings to generate personalized recommendations.  
+The **Steam Game Recommendation System** is a web-based application designed to help users discover new games based on their preferences. Built using **Streamlit**, **Python**, and **pandas**, this project leverages content-based filtering techniques to recommend games similar to the ones users already enjoy. The system analyzes game descriptions, genres, and player ratings to generate personalized recommendations.  
 
 This project was developed as the final submission for **CS50x**, showcasing the skills and concepts learned throughout the course, including programming, data analysis, and software development.  
 
